@@ -4,6 +4,8 @@ const cors = require('cors')
 const PORT = 3000;
 
 app.use(cors())
+app.use(express.static(__dirname));
+
 
 
 const rappers = {
@@ -24,9 +26,6 @@ const rappers = {
     }
 }
 
-app.get('/', (req,res) => {
-    res.sendFile(__dirname + "/index.html")
-})
 
 app.get('/api', (req,res) => {
     res.json(rappers)
@@ -44,4 +43,8 @@ app.get('/api/:rapperName', (req,res) => {
 
 app.listen(process.env.PORT || PORT, () => {
     console.log(`Server is running on port ${PORT}`)
+})
+
+app.get('/', (req,res) => {
+    res.sendFile(__dirname + "/index.html")
 })
